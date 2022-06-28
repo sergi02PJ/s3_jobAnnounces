@@ -1,0 +1,50 @@
+body {
+    background-color: transparent !important;
+    overflow-x: hidden;
+    font-family: 'Anton';
+    overflow-y: hidden;
+}
+
+.anuncioNuevo {
+    position:absolute;
+    left: 40%;
+    top: 1%;
+    height: 1.7em;
+    min-width: 13em;
+    border-radius: 6px;
+    background-color: black;
+    padding-right: 1vw;
+    color: white;
+    font-size: 35px;
+    animation: animacionIn 1.5s alternate ease-in;    
+}
+
+.anuncioFade {
+    animation: animacionOut 1.5s alternate ease-in;    
+}
+
+#icon {
+    margin: 12px;
+}
+
+@keyframes animacionIn {
+    0%   {
+        min-width: 1.8em;
+        left: 50%;
+    } 100% {
+        min-width: 13em;
+        left: 40%;
+    }
+}
+
+@keyframes animacionOut {
+    0%   {
+        min-width: 13em;
+        left: 40%;
+        opacity: 1;
+    } 100% {
+        min-width: 1.8em;
+        left: 50%;
+        opacity: 0;
+    }
+}
