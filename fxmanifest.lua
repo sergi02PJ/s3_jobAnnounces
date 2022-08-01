@@ -15,25 +15,14 @@ files {
 	'html/*.ogg',
 	'html/js/app.js', 
 	'html/css/style.css',
-	'html/imagenes/lspd.jpg',
-	'html/imagenes/safd.jpg',
-	'html/imagenes/lsc.jpg',
-	'html/imagenes/taxi.jpg'
 }
 
-shared_scripts "config.lua"
-
 client_scripts {
-	'client/client.lua',
+	'client/client.lua', "config.lua"
 }
 
 server_scripts {
-	'server/server.lua',
-}
-
-escrow_ignore {
-	'config.lua',
-	'html/*.*'
+	'server/server.lua', "config.lua"
 }
 
 dependencies {
