@@ -16,9 +16,9 @@ end, false)
 sendAnnounce = function(xPlayer, type)
     local playerJob = xPlayer.getJob()
 
-	  if playerJob then
-		    local jobName = playerJob.name
-		    if Config.Announces[jobName] then
+    if playerJob then
+        local jobName = playerJob.name
+        if Config.Announces[jobName] then
             local announce = Config.Announces[jobName]
             local adType = announce[type]
 
@@ -28,8 +28,8 @@ sendAnnounce = function(xPlayer, type)
             else
                 xPlayer.showNotification(Config.Translations.noMoney)
             end
-		    else
-			      xPlayer.showNotification(Config.Translations.noJob)
-		    end
-	  end
+        else
+            xPlayer.showNotification(Config.Translations.noJob)
+        end
+    end
 end
