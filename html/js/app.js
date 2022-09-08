@@ -1,29 +1,32 @@
-var persistentNotifs = {};
-var colaNotifs=[];
-var mostrando=false;
+const asyncWait = async(time) => new Promise(r => setTimeout(() => r(), time))
 
-var soundNoti = new Audio("alert_anuncio.ogg");
-var busy = false
+const notificationSound = new Audio("alert_anuncio.ogg")
+let adRunning = false
 
-
-window.addEventListener('message', function (event) {
-    if(event.data.anuncio) {
-        if(event.data.admin) {
-            newAdminAnuncio(texto)
-        } else {
-            if(busy == false)
-                newAnuncio(event.data.job, event.data.texto)
-        }
-    }
-});
-
-function newAnuncio(icono, texto) {
+const newAnuncio = async(icono, texto) => {
     let anuncioPlantilla = `<div class="anuncioNuevo"><i id="icon" class="${icono}"></i> <span id="texto" style="display:none;">${texto}</span></div>`
-    busy = true
+    adRunning = true
 
     $('.anunciosZone').append(anuncioPlantilla)
-    soundNoti.play()
-    setTimeout(() => {$('#texto').fadeIn(); $('#icon').addClass("fa-fade")}, 1500)
-    setTimeout(() => {$('.anuncioNuevo').addClass("anuncioFade"); $('#texto').fadeOut();}, 4500)
-    setTimeout(() => {$('.anuncioNuevo').fadeOut(); $('.anuncioNuevo').remove(); busy = false;}, 6000)
+    notificationSound.play()
+
+    await asyncWait(1500)
+    $('#texto').fadeIn()
+    $('#icon').addClass("fa-fade")
+
+    await asyncWait(3000)
+    $('.anuncioNuevo').addClass("anuncioFade")
+    $('#texto').fadeOut()
+
+    await asyncWait(1500)
+    $('.anuncioNuevo').fadeOut()
+    $('.anuncioNuevo').remove()
+    adRunning = false
 }
+
+window.addEventListener('message', function (event) {
+    if (!event.data.anuncio) return
+
+    if (!adRunning)
+        return newAnuncio(event.data.job, event.data.texto)
+})
