@@ -1,6 +1,7 @@
 fx_version 'bodacious'
-lua54 'yes'
 game 'gta5'
+
+lua54 'yes'
 
 name 's3_jobAnuncios'
 author 'S3 Development - https://github.com/sergi02PJ/'
@@ -17,14 +18,10 @@ files {
 	'html/css/style.css',
 }
 
-client_scripts {
-	'client/client.lua', "config.lua"
-}
+shared_script 'config.lua'
 
-server_scripts {
-	'server/server.lua', "config.lua"
-}
+client_script 'client/*.lua'
 
-dependencies {
-	'es_extended',
-}
+server_script 'server/server.lua'
+
+dependency 'es_extended'
